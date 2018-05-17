@@ -1,5 +1,5 @@
 import csv
-from models.currency import Currency as Currency
+from models.Currency import Currency
 
 class CsvCurrencyExchange:
 
