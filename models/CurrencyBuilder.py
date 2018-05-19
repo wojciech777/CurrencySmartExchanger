@@ -1,4 +1,6 @@
 from models.Currency import Currency
+from models.CurrencyNameValuePair import CurrencyNameValuePair
+
 
 class CurrencyBuilder:
 
@@ -12,10 +14,10 @@ class CurrencyBuilder:
 
     def add_currency(self, currency_name, added_currency_value_to_current_currency):
         for tup in self.currencyVector:
-            if currency_name == tup[0]:
+            if currency_name == tup.get_name():
                 self.currencyVector.remove(tup)
                 break
-        self.currencyVector.append((currency_name, added_currency_value_to_current_currency))
+        self.currencyVector.append(CurrencyNameValuePair(currency_name, added_currency_value_to_current_currency))
         return self
 
     def build(self):
