@@ -1,7 +1,8 @@
 import csv
-from models.Currency import Currency
+from models.currency import Currency
 
-class CsvCurrencyExchange:
+
+class CsvCurrenciesImporter:
 
     def __init__(self):
         self._currencies = {}

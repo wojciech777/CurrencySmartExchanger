@@ -1,5 +1,6 @@
 import unittest
-from models.Currency import Currency
+from models.currency import Currency
+
 
 class TestCurrencyClassMethods(unittest.TestCase):
     def test_get_name(self):
@@ -18,6 +19,7 @@ class TestCurrencyClassMethods(unittest.TestCase):
         vector = [("euro", 2), ("dollar", 3)]
         currency = Currency("", vector)
         self.assertEqual([("euro", 2), ("dollar", 3)], currency.get_exchange_vector())
+
 
 if __name__ == '__main__':
     unittest.main()

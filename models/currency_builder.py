@@ -1,4 +1,5 @@
-from models.Currency import Currency
+from models.currency import Currency
+
 
 class CurrencyBuilder:
 

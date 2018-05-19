@@ -1,9 +1,10 @@
-import sqlite3
 import logging
-import sys
+import sqlite3
+
 from models.user import *
 
-class Database_manager:
+
+class DatabaseManager:
     def __init__(self, name):
         self.__name = name
 
@@ -15,11 +16,13 @@ class Database_manager:
          PASSWORD TEXT, EMAIL TEXT, JOIN_DATE TEXT, LAST_LOGIN TEXT);''')
         logging.info("Table created successfully")
         conn.close()
+
     def reset(self):
         conn = sqlite3.connect(self.__name)
         conn.execute('''DELETE FROM USER''')
         conn.commit()
         conn.close()
+
     def get_all_users(self):
         conn = sqlite3.connect(self.__name)
         cursor = conn.execute("SELECT * from USER")
@@ -29,8 +32,10 @@ class Database_manager:
             users.append(user)
         conn.close()
         return users
+
     def get_users(self, field, value):
         pass
+
     def add_user(self, user):
         if not isinstance(user, User):
             raise ValueError("add_user: argument has to be instance of class User")
@@ -48,11 +53,12 @@ class Database_manager:
         conn.commit()
         conn.close()
 
+
 if __name__ == '__main__':
-    dbmanager = Database_manager("tests.sqlite3")
+    dbmanager = DatabaseManager("tests.sqlite3")
     dbmanager.create()
     dbmanager.reset()
-    dbmanager.add_user(User("john","qwe123","john88@aa.com"))
-    dbmanager.add_user(User("asd","eee","rrr@aa.com"))
+    dbmanager.add_user(User("john", "qwe123", "john88@aa.com"))
+    dbmanager.add_user(User("asd", "eee", "rrr@aa.com"))
     dbmanager.get_all_users()
     print(dbmanager.get_all_users()[0])
