@@ -1,6 +1,6 @@
 from typing import List
 
-from models import CurrencyNameValuePair
+from models import currency_name_value_pair
 
 
 class Currency:

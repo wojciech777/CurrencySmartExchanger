@@ -1,5 +1,5 @@
 import unittest
-import csv_parsing.currencies as currencies
+import csv_parsing.csv_importer as currencies
 import mock
 
 
@@ -17,8 +17,8 @@ pln,3.4235,4.324,1"""
 
     def test_creating_currencies_list(self):
         curr = self.__read_from_mock_file()
-        currencies = curr.get_currencies_list()
-        self.assertTrue(currencies)
+        currency_list = curr.get_currencies_list()
+        self.assertTrue(currency_list)
 
     def test_exchange_calculation(self):
         curr = self.__read_from_mock_file()
@@ -27,7 +27,7 @@ pln,3.4235,4.324,1"""
     def __read_from_mock_file(self):
         with mock.patch("builtins.open", mock.mock_open(read_data=self.TEST_CSV_CONTENT)) as mock_file:
             mock_file.return_value.__iter__ = lambda file: iter(file.readline, '')
-            curr = currencies.CsvCurrencyExchange()
+            curr = currencies.CsvCurrenciesImporter()
             curr.fill_data_from_csv('path/to/open', ',')
             return curr
 

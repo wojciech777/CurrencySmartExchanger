@@ -1,5 +1,5 @@
-from models.Currency import Currency
-from models.CurrencyNameValuePair import CurrencyNameValuePair
+from models.currency_name_value_pair import CurrencyNameValuePair
+from models.currency import Currency
 
 
 class CurrencyBuilder:

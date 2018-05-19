@@ -1,9 +1,8 @@
 import unittest
-from models.Currency import Currency
-from models.CurrencyNameValuePair import CurrencyNameValuePair
+from models.currency import Currency
+from models.currency_name_value_pair import CurrencyNameValuePair
 
-
-class TestCurrencyClassMethods(unittest.TestCase):
+class CurrencyTests(unittest.TestCase):
     def test_get_name(self):
         self.assertEqual("wojtek", Currency("wojtek", []).get_name())
 
@@ -19,12 +18,19 @@ class TestCurrencyClassMethods(unittest.TestCase):
     def test_get_currencyVector(self):
         dictionary = [CurrencyNameValuePair("euro", 2), CurrencyNameValuePair("dollar", 3)]
         currency = Currency("", dictionary)
-        self.assertEqual(dictionary, currency.get_all_related_currencies_as_list())
+        self.assertEqual\
+            (dictionary, currency.get_all_related_currencies_as_list())
 
     def test_get_specified_related_currency(self):
-        dictionary = [CurrencyNameValuePair("euro", 2), CurrencyNameValuePair("dollar", 3)]
+        dictionary = \
+            [CurrencyNameValuePair("euro", 2),
+             CurrencyNameValuePair("dollar", 3)]
         currency = Currency("", dictionary)
-        self.assertEqual(3, currency.get_related_currency_by_name("dollar").get_value())
+        self.assertEqual\
+            (3,
+             currency.get_related_currency_by_name("dollar")
+             .get_value())
+
 
 if __name__ == '__main__':
     unittest.main()
