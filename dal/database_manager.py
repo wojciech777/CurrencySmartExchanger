@@ -7,6 +7,7 @@ from models.user import *
 class DatabaseManager:
     def __init__(self, name):
         self.__name = name
+        self.create()
 
     def create(self):
         conn = sqlite3.connect(self.__name)
@@ -34,7 +35,20 @@ class DatabaseManager:
         return users
 
     def get_users(self, field, value):
-        pass
+        conn = sqlite3.connect(self.__name)
+        cursor = conn.execute("SELECT * from USER WHERE "+str(field)+"='"+str(value)+"'")
+        users = []
+        for row in cursor:
+            user = User(row[1], row[2], row[3], row[4], row[5])
+            users.append(user)
+        conn.close()
+        return users
+
+    def delete_user(self, field, value):
+        conn = sqlite3.connect(self.__name)
+        conn.execute("DELETE from USER WHERE " + str(field) + "='" + str(value) + "'")
+        conn.commit()
+        conn.close()
 
     def add_user(self, user):
         if not isinstance(user, User):
@@ -52,13 +66,3 @@ class DatabaseManager:
         conn.execute("INSERT INTO USER VALUES (NULL, ?, ?, ?, ?, ?)", (name, passwd, email, join_date, last_login))
         conn.commit()
         conn.close()
-
-
-if __name__ == '__main__':
-    dbmanager = DatabaseManager("tests.sqlite3")
-    dbmanager.create()
-    dbmanager.reset()
-    dbmanager.add_user(User("john", "qwe123", "john88@aa.com"))
-    dbmanager.add_user(User("asd", "eee", "rrr@aa.com"))
-    dbmanager.get_all_users()
-    print(dbmanager.get_all_users()[0])
