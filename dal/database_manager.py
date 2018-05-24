@@ -25,8 +25,14 @@ class DatabaseManager:
         conn.close()
 
     def get_all_users(self):
+        return self.__get_usersFor("SELECT * from USER")
+
+    def get_users(self, field, field_value):
+        return self.__get_usersFor("SELECT * from USER WHERE " + str(field) + "='" + str(field_value) + "'")
+
+    def __get_usersFor(self, requestString):
         conn = sqlite3.connect(self.__name)
-        cursor = conn.execute("SELECT * from USER")
+        cursor = conn.execute(requestString)
         users = []
         for row in cursor:
             user = User(row[1], row[2], row[3], row[4], row[5])
@@ -34,19 +40,9 @@ class DatabaseManager:
         conn.close()
         return users
 
-    def get_users(self, field, value):
+    def delete_users(self, field, field_value):
         conn = sqlite3.connect(self.__name)
-        cursor = conn.execute("SELECT * from USER WHERE "+str(field)+"='"+str(value)+"'")
-        users = []
-        for row in cursor:
-            user = User(row[1], row[2], row[3], row[4], row[5])
-            users.append(user)
-        conn.close()
-        return users
-
-    def delete_user(self, field, value):
-        conn = sqlite3.connect(self.__name)
-        conn.execute("DELETE from USER WHERE " + str(field) + "='" + str(value) + "'")
+        conn.execute("DELETE from USER WHERE " + str(field) + "='" + str(field_value) + "'")
         conn.commit()
         conn.close()
 

@@ -15,3 +15,7 @@ class NBPServiceTestCase(unittest.TestCase):
         first = models[0]
         self.assertEqual(first.code, 'THB')
         self.assertEqual(first.currency, 'bat (Tajlandia)')
+
+
+if __name__ == '__main__':
+    unittest.main()
