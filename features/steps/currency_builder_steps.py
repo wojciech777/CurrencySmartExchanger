@@ -19,4 +19,4 @@ def step_impl(context):
 @then('previous exchange should get updated')
 def step_impl(context):
     currency = context.builder.build()
-    assert currency.get_exchange_vector()[-1][1] == 2.56
+    assert currency.get_related_currency_by_name('USD').get_value() == 2.56

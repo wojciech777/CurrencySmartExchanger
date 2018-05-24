@@ -1,5 +1,4 @@
 import unittest
-import re
 from models.user import *
 from datetime import datetime
 

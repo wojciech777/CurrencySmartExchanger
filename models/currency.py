@@ -1,22 +1,16 @@
-from typing import List
-
-from models import currency_name_value_pair
-from models.null_currency_name_value_pair import NullCurrencyNameValuePair
-
-
 class Currency:
     def __init__(self, name, exchange_dictionary):
-        self.name = name
-        self.exchange_dictionary = exchange_dictionary
+        self._name = name
+        self._exchange_dictionary = exchange_dictionary
 
     def get_name(self):
-        return self.name
+        return self._name
 
     def get_all_related_currencies_as_list(self):
-        return self.exchange_dictionary
+        return self._exchange_dictionary
 
     def get_related_currency_by_name(self, currency_name):
-        for currency_pair in self.exchange_dictionary:
+        for currency_pair in self._exchange_dictionary:
             if currency_pair.get_name() == currency_name:
                 return currency_pair
-        return NullCurrencyNameValuePair
+        return None
