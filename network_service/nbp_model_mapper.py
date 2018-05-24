@@ -1,8 +1,8 @@
-import json
-from network_service.models.nbp_currency import NBPCurrency
+from network_service.nbp_currency import NBPCurrency
+
 
 class NBPModelMapper:
-    def mapModels(self, json_data):
+    def map_models(self, json_data):
         try:
             rates = json_data[0]['rates']
             print(rates)

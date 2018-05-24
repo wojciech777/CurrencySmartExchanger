@@ -26,21 +26,22 @@ class CurrenciesExchange:
             if not self.currency_dictionary[new_currency.get_name(), currency]:
                 self.currency_dictionary[new_currency.get_name(), currency] = self.currency_dictionary[
                                                                                   new_currency.get_name(), default_exchange_currency] * \
-                                                                        self.currency_dictionary[
-                                                                            default_exchange_currency, currency]
+                                                                              self.currency_dictionary[
+                                                                                  default_exchange_currency, currency]
                 self.currency_dictionary[currency, new_currency.get_name()] = 1 / self.currency_dictionary[
                     new_currency.get_name(), default_exchange_currency] * self.currency_dictionary[
-                                                                            default_exchange_currency, currency]
+                                                                                  default_exchange_currency, currency]
         for unknown_currency in unknown_currencies:
             for currency in self.currencies:
                 self.currency_dictionary[unknown_currency, unknown_currency] = 1
                 if not self.currency_dictionary[unknown_currency, currency]:
                     self.currency_dictionary[new_currency.get_name(), currency] = self.currency_dictionary[
-                                                                                unknown_currency, new_currency.get_name()] * \
-                                                                            self.currency_dictionary[
-                                                                                new_currency.get_name(), currency]
+                                                                                      unknown_currency, new_currency.get_name()] * \
+                                                                                  self.currency_dictionary[
+                                                                                      new_currency.get_name(), currency]
                     self.currency_dictionary[currency, new_currency.get_name()] = 1 / self.currency_dictionary[
-                        unknown_currency, new_currency.get_name()] * self.currency_dictionary[new_currency.get_name(), currency]
+                        unknown_currency, new_currency.get_name()] * self.currency_dictionary[
+                                                                                      new_currency.get_name(), currency]
         for unknown_currency in unknown_currencies:
             self.currencies.append(unknown_currency)
 
@@ -53,4 +54,3 @@ class CurrenciesExchange:
 
     def get_currency_exchange_dictionary(self):
         return self.currency_dictionary
-

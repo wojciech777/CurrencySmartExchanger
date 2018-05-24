@@ -6,4 +6,4 @@ class NullCurrencyNameValuePair:
         return ""
 
     def get_value(self):
-        return -1
+        return 1
