@@ -31,6 +31,16 @@ class CurrencyTests(unittest.TestCase):
              currency.get_related_currency_by_name("dollar")
              .get_value())
 
+    def test_get_absent_related_currency(self):
+        dictionary = \
+            [CurrencyNameValuePair("euro", 2),
+             CurrencyNameValuePair("dollar", 3)]
+        currency = Currency("", dictionary)
+        self.assertEqual\
+            (-1,
+             currency.get_related_currency_by_name("rororo")
+             .get_value(self))
+
 
 if __name__ == '__main__':
     unittest.main()

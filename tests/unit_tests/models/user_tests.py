@@ -1,5 +1,4 @@
 import unittest
-import re
 from models.user import *
 from datetime import datetime
 
@@ -30,7 +29,7 @@ class TestUM(unittest.TestCase):
     def test_user_join_date(self):
         user = User("name", "passwd", "email@sd.xc").get_join_date().timestamp()
         self.assertGreater(datetime.now().timestamp(), user)
-        User("name", "passwd", "email@sd.xc", datetime.now(), datetime.now()).get_join_date().timestamp()
+        user = User("name", "passwd", "email@sd.xc", datetime.now(), datetime.now()).get_join_date().timestamp()
         self.assertGreater(datetime.now().timestamp(), user)
 
     def test_user_last_login(self):
