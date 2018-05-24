@@ -46,8 +46,7 @@ class CurrenciesExchange:
 
     def add_currencies(self, currencies, default_exchange_currency):
         for currency in currencies:
-            self.add_currency(currency.get_name(), currency.get_all_related_currencies_as_list(),
-                              default_exchange_currency)
+            self.add_currency(currency, default_exchange_currency)
 
     def get_exchange_rate(self, source_currency, destination_currency):
         return self.currency_dictionary[source_currency, destination_currency]

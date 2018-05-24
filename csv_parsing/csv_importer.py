@@ -1,5 +1,6 @@
 import csv
 from models.currency import Currency
+from models.currency_builder import CurrencyBuilder
 
 
 class CsvCurrenciesImporter:
@@ -21,7 +22,7 @@ class CsvCurrenciesImporter:
         return self._currencies.values()
 
     def get_exchange_ratio(self, from_currency, to_currency):
-        return self._exchanges[from_currency.lower(), to_currency.lower()]
+        return self._exchanges[from_currency.upper(), to_currency.upper()]
 
     def get_currencies_list(self):
         if not self._exchanges:
@@ -29,12 +30,13 @@ class CsvCurrenciesImporter:
         else:
             currencies_list = []
             for curr_code in list(self._currencies.values()):
-                calc_vector = {}
                 curr_list = list(self._currencies.values())
                 curr_list.remove(curr_code)
+                builder = CurrencyBuilder()
+                builder.set_name(curr_code)
                 for to_calculate in curr_list:
-                    calc_vector[to_calculate] = self._exchanges[curr_code, to_calculate]
-                currencies_list.append(Currency(curr_code, calc_vector))
+                    builder.add_currency(to_calculate, self.get_exchange_ratio(curr_code, to_calculate))
+                currencies_list.append(builder.build())
             return currencies_list
 
     def __fill_currency_types(self, reader):
@@ -43,7 +45,7 @@ class CsvCurrenciesImporter:
         next(types)  # skip first, empty cell
         current_col = 0
         for currency_code in types:
-            self._currencies[current_col] = currency_code.lower()
+            self._currencies[current_col] = currency_code.upper()
             current_col += 1
 
     def __fill_exchange_rates(self, reader):
@@ -54,5 +56,5 @@ class CsvCurrenciesImporter:
                 if current_col == 0:
                     currency = col
                 else:
-                    self._exchanges[self._currencies[current_col - 1], currency.lower()] = col
+                    self._exchanges[self._currencies[current_col - 1], currency.upper()] = col
                 current_col += 1

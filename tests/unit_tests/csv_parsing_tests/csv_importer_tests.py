@@ -13,7 +13,7 @@ pln,3.4235,4.324,1"""
         curr = self.__read_from_mock_file()
         value_list = list(curr.get_currencies_names())
 
-        self.assertListEqual(value_list, ['usd', 'eur', 'pln'])
+        self.assertListEqual(value_list, ['USD', 'EUR', 'PLN'])
 
     def test_creating_currencies_list(self):
         curr = self.__read_from_mock_file()
