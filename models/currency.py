@@ -1,6 +1,7 @@
 from typing import List
 
 from models import currency_name_value_pair
+from models.null_currency_name_value_pair import NullCurrencyNameValuePair
 
 
 class Currency:
@@ -18,4 +19,4 @@ class Currency:
         for currency_pair in self.exchange_dictionary:
             if currency_pair.get_name() == currency_name:
                 return currency_pair
-        return None
+        return NullCurrencyNameValuePair

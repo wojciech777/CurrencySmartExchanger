@@ -73,5 +73,5 @@ class CurrencyBuilderTests(unittest.TestCase):
         self.assertEqual([], currency.get_all_related_currencies_as_list())
 
 
-if __name__ == '__main__':
-    unittest.main()
+if __name__ == '__main__':    unittest.main()
+
