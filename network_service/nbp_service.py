@@ -3,8 +3,9 @@ import sys
 import requests
 
 from network_service.nbp_model_mapper import NBPModelMapper
+from network_service.nbp_service_interface import NBPServiceInterface
 
-class NBPService:
+class NBPService(NBPServiceInterface):
     def __init__(self):
         self._mapper = NBPModelMapper()
         self._url = 'http://api.nbp.pl/api/exchangerates/tables/'

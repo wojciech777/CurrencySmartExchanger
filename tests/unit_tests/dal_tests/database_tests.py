@@ -15,7 +15,7 @@ class TestDB(unittest.TestCase):
         self.database_manager.add_user(User("qwe", "xcv", "tyu@aa.com"))
         self.assertEqual(len(self.database_manager.get_all_users()), 3)
         self.assertEqual(len(self.database_manager.get_users("NAME","john")), 1)
-        self.database_manager.delete_user("NAME", "john")
+        self.database_manager.delete_users("NAME", "john")
         self.assertEqual(len(self.database_manager.get_users("NAME","john")), 0)
         self.assertEqual(len(self.database_manager.get_all_users()), 2)
         self.database_manager.reset()
