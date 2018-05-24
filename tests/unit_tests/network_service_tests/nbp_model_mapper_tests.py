@@ -26,3 +26,7 @@ class NBPServiceTestCase(unittest.TestCase):
 
         models = nbpModelMapper.mapModels(json_obj)
         self.assertEqual(len(models), 0)
+
+
+if __name__ == '__main__':
+    unittest.main()
