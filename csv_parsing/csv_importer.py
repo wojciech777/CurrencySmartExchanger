@@ -1,5 +1,5 @@
 import csv
-from models.currency import Currency
+
 from models.currency_builder import CurrencyBuilder
 
 

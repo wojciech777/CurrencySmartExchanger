@@ -2,6 +2,7 @@ import unittest
 from models.currency import Currency
 from models.currency_name_value_pair import CurrencyNameValuePair
 
+
 class CurrencyTests(unittest.TestCase):
     def test_get_name(self):
         self.assertEqual("wojtek", Currency("wojtek", []).get_name())
@@ -18,7 +19,7 @@ class CurrencyTests(unittest.TestCase):
     def test_get_currencyVector(self):
         dictionary = [CurrencyNameValuePair("euro", 2), CurrencyNameValuePair("dollar", 3)]
         currency = Currency("", dictionary)
-        self.assertEqual\
+        self.assertEqual \
             (dictionary, currency.get_all_related_currencies_as_list())
 
     def test_get_specified_related_currency(self):
@@ -26,7 +27,7 @@ class CurrencyTests(unittest.TestCase):
             [CurrencyNameValuePair("euro", 2),
              CurrencyNameValuePair("dollar", 3)]
         currency = Currency("", dictionary)
-        self.assertEqual\
+        self.assertEqual \
             (3,
              currency.get_related_currency_by_name("dollar")
              .get_value())
@@ -36,7 +37,7 @@ class CurrencyTests(unittest.TestCase):
             [CurrencyNameValuePair("euro", 2),
              CurrencyNameValuePair("dollar", 3)]
         currency = Currency("", dictionary)
-        self.assertEqual\
+        self.assertEqual \
             (-1,
              currency.get_related_currency_by_name("rororo")
              .get_value(self))

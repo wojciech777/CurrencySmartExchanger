@@ -3,8 +3,8 @@ import unittest
 from dal.DatabaseLayer import DatabaseLayer
 from dal.database_manager import *
 
-class MockDatabaseManager:
 
+class MockDatabaseManager:
     lastMethod = ""
 
     def create(self):
@@ -25,12 +25,12 @@ class MockDatabaseManager:
     def add_user(self, user):
         self.lastMethod = "add_user " + user.get_name()
 
+
 class TestDBLayer(unittest.TestCase):
     def setUp(self):
         self.database_layer = DatabaseLayer()
         self.mockDB = MockDatabaseManager()
         self.database_layer.database_manager = self.mockDB
-
 
     def test_crud_layer(self):
         self.database_layer.get_all_users()

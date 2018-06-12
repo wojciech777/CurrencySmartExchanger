@@ -24,5 +24,6 @@ class TestUserForms(unittest.TestCase):
         self.assertNotEqual(user_forms, None)
         self.assertEqual(email, user_forms.get_email())
 
+
 if __name__ == '__main__':
     unittest.main()
