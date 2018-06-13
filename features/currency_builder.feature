@@ -3,7 +3,7 @@
 Feature: Creating new currency
   This feature allows us to create an instance
   of new currency with all the exchange rates and name
-  chosen by the end-user.
+  chosen arbitrarily.
 
   Scenario: Duplication of exchange rate
     Given empty builder

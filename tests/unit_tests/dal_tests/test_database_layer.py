@@ -1,6 +1,6 @@
 import unittest
 
-from dal.DatabaseLayer import DatabaseLayer
+from dal.database_layer import DatabaseLayer
 from dal.database_manager import *
 
 

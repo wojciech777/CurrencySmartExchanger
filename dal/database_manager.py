@@ -24,6 +24,9 @@ class DatabaseManager:
         conn.commit()
         conn.close()
 
+    def get_user_by(self, criteria, value):
+        return self.get_users(criteria, value)[0]
+
     def get_all_users(self):
         return self.__get_usersFor("SELECT * from USER")
 

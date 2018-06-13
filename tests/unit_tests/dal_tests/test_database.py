@@ -1,4 +1,5 @@
 import unittest
+
 from dal.database_manager import *
 
 
@@ -21,6 +22,13 @@ class TestDB(unittest.TestCase):
         self.assertEqual(len(self.database_manager.get_all_users()), 2)
         self.database_manager.reset()
         self.assertEqual(len(self.database_manager.get_all_users()), 0)
+
+    def test_add_user(self):
+        self.database_manager.create()
+        self.database_manager.reset()
+        self.database_manager.add_user(User('name', 'passd', 'name@gmail.com'))
+        user = self.database_manager.get_user_by('NAME', 'name')
+        assert user
 
 
 if __name__ == '__main__':
