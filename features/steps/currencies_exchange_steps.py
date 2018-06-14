@@ -20,4 +20,4 @@ def step_impl(context):
 
 @then('system should allow us to check exchange rates of added currencies')
 def step_impl(context):
-    assert context.exchange.get_exchange_rate('USD', 'EUR') == 1.5
+    assert context.exchange.get_exchange_rate('USD', 'EUR') == 0.765

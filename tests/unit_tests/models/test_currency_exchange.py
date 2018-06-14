@@ -49,3 +49,5 @@ class TestCurrencyExchangeClassMethods(unittest.TestCase):
         importer.fill_data_from_csv('../../../features/test_data/rates.csv', ',')
         currency_list = importer.get_currencies_list()
         exchange.add_currencies(currency_list, 'USD')
+        rate = exchange.get_exchange_rate('USD', 'EUR')
+        assert rate == 0.765

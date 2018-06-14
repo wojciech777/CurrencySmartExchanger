@@ -1,4 +1,5 @@
 import unittest
+
 from models.currency import Currency
 from models.currency_name_value_pair import CurrencyNameValuePair
 
@@ -37,10 +38,7 @@ class CurrencyTests(unittest.TestCase):
             [CurrencyNameValuePair("euro", 2),
              CurrencyNameValuePair("dollar", 3)]
         currency = Currency("", dictionary)
-        self.assertEqual \
-            (-1,
-             currency.get_related_currency_by_name("rororo")
-             .get_value(self))
+        self.assertEqual(None, currency.get_related_currency_by_name("rororo"))
 
 
 if __name__ == '__main__':
