@@ -9,15 +9,16 @@ class CurrenciesExchange:
         for curr in self._currs:
             if not ((def_exchange_curr, curr) in self._curr_dict):
                 raise ValueError("This default_exchange_currency can't be used, chose another")
-        if not (new_curr in self._currs):
+        if not (new_curr.get_name() in self._currs):
             self._currs.append(new_curr.get_name())
         self._curr_dict[new_curr.get_name(), new_curr.get_name()] = 1
         self._unkn_currs = []
-        self._add_new_currency(new_curr)
-        self._update_old_currencies(new_curr, def_exchange_curr)
+        self.__add_new_currency(new_curr)
+        self.__update_old_currencies(new_curr, def_exchange_curr)
         for unkn_curr in self._unkn_currs:
-            self._currs.append(unkn_curr)
-        self._update_unknown_currencies(new_curr)
+            if not (unkn_curr in self._currs):
+                self._currs.append(unkn_curr)
+        self.__update_unknown_currencies(new_curr)
         self._unkn_currs = []
 
     def add_currencies(self, currs, def_exchange_curr):
@@ -33,7 +34,7 @@ class CurrenciesExchange:
     def get_currencies_names(self):
         return self._currs
 
-    def _add_new_currency(self, new_curr):
+    def __add_new_currency(self, new_curr):
         for exchange_rate in new_curr.get_all_related_currencies_as_list():
             if self._currs.count(exchange_rate.get_name()) == 0:
                 self._unkn_currs.append(exchange_rate.get_name())
@@ -42,7 +43,7 @@ class CurrenciesExchange:
             if not ((exchange_rate.get_name(), new_curr.get_name()) in self._curr_dict):
                 self._curr_dict[exchange_rate.get_name(), new_curr.get_name()] = 1 / exchange_rate.get_value()
 
-    def _update_old_currencies(self, new_curr, def_exchange_curr):
+    def __update_old_currencies(self, new_curr, def_exchange_curr):
         for curr in self._currs:
             if not((new_curr.get_name(), curr) in self._curr_dict):
                 self._curr_dict[new_curr.get_name(), curr] = self._curr_dict[
@@ -54,7 +55,7 @@ class CurrenciesExchange:
                         new_curr.get_name(), def_exchange_curr] * self._curr_dict[
                                                                     def_exchange_curr, curr]
 
-    def _update_unknown_currencies(self, new_curr):
+    def __update_unknown_currencies(self, new_curr):
         for unkn_curr in self._unkn_currs:
             for curr in self._currs:
                 self._curr_dict[unkn_curr, unkn_curr] = 1
