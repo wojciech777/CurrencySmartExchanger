@@ -38,7 +38,8 @@ class CurrenciesExchange:
                 self._unkn_currs.append(exchange_rate.get_name())
 
             self._curr_dict[new_curr.get_name(), exchange_rate.get_name()] = exchange_rate.get_value()
-            self._curr_dict[exchange_rate.get_name(), new_curr.get_name()] = 1 / exchange_rate.get_value()
+            if not ((exchange_rate.get_name(), new_curr.get_name()) in self._curr_dict):
+                self._curr_dict[exchange_rate.get_name(), new_curr.get_name()] = 1 / exchange_rate.get_value()
 
     def _update_old_currencies(self, new_curr, def_exchange_curr):
         for curr in self._currs:
@@ -47,9 +48,10 @@ class CurrenciesExchange:
                                                                 new_curr.get_name(), def_exchange_curr] * \
                                                              self._curr_dict[
                                                                 def_exchange_curr, curr]
-                self._curr_dict[curr, new_curr.get_name()] = 1 / self._curr_dict[
-                    new_curr.get_name(), def_exchange_curr] * self._curr_dict[
-                                                                def_exchange_curr, curr]
+                if not ((curr, new_curr.get_name()) in self._curr_dict):
+                    self._curr_dict[curr, new_curr.get_name()] = 1 / self._curr_dict[
+                        new_curr.get_name(), def_exchange_curr] * self._curr_dict[
+                                                                    def_exchange_curr, curr]
 
     def _update_unknown_currencies(self, new_curr):
         for unkn_curr in self._unkn_currs:
@@ -60,6 +62,7 @@ class CurrenciesExchange:
                                                                     unkn_curr, new_curr.get_name()] * \
                                                           self._curr_dict[
                                                                     new_curr.get_name(), curr]
-                    self._curr_dict[curr, unkn_curr] = 1 / self._curr_dict[
-                        unkn_curr, new_curr.get_name()] * self._curr_dict[
-                                                                    new_curr.get_name(), curr]
+                    if not((curr, unkn_curr) in  self._curr_dict):
+                        self._curr_dict[curr, unkn_curr] = 1 / self._curr_dict[
+                            unkn_curr, new_curr.get_name()] * self._curr_dict[
+                                                                new_curr.get_name(), curr]
