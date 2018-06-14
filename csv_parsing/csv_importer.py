@@ -56,5 +56,5 @@ class CsvCurrenciesImporter:
                 if current_col == 0:
                     currency = col
                 else:
-                    self._exchanges[self._currencies[current_col - 1], currency.upper()] = col
+                    self._exchanges[self._currencies[current_col - 1], currency.upper()] = float(col)
                 current_col += 1
