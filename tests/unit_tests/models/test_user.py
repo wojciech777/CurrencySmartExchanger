@@ -1,6 +1,7 @@
 import unittest
-from models.user import *
 from datetime import datetime
+
+from models.user import *
 
 
 class TestUM(unittest.TestCase):
@@ -25,12 +26,6 @@ class TestUM(unittest.TestCase):
         with self.assertRaises(ValueError):
             User("name", "passc", "zxcas")
         self.assertNotEqual(re.match(r'^\S+@\S+$', email), None)
-
-    def test_user_join_date(self):
-        user = User("name", "passwd", "email@sd.xc").get_join_date().timestamp()
-        self.assertGreater(datetime.now().timestamp(), user)
-        user = User("name", "passwd", "email@sd.xc", datetime.now(), datetime.now()).get_join_date().timestamp()
-        self.assertGreater(datetime.now().timestamp(), user)
 
     def test_user_last_login(self):
         self.assertEqual(User("name", "passwd", "email@sd.xc").get_last_login(), None)
