@@ -1,9 +1,6 @@
 class NBPServiceInterface:
     def __init__(self):
-        raise NotImplementedError()
-
-    def getCurrencies(self, category):
-        raise NotImplementedError()
+        print("")
 
     def getCurrenciesCategoryA(self):
         raise NotImplementedError()

@@ -6,27 +6,22 @@ from datetime import datetime
 class NBPServiceProxy(NBPServiceInterface):
     def __init__(self):
         super().__init__()
-        self._nbp_service = NBPService()
+        self.nbp_service = NBPService()
 
     def getCurrenciesCategoryA(self):
         time = datetime.now().timestamp()
-        result = self._nbp_service.getCurrenciesCategoryA()
+        result = self.nbp_service.getCurrenciesCategoryA()
         print('get currencies done in ' + str(datetime.now().timestamp() - time) + ' ms')
         return result
 
     def getCurrenciesCategoryB(self):
         time = datetime.now().timestamp()
-        result = self._nbp_service.getCurrenciesCategoryB()
+        result = self.nbp_service.getCurrenciesCategoryB()
         print('get currencies done in ' + str(datetime.now().timestamp() - time) + ' ms')
         return result
 
     def getCurrenciesCategoryC(self):
         time = datetime.now().timestamp()
-        result = self._nbp_service.getCurrenciesCategoryC()
+        result = self.nbp_service.getCurrenciesCategoryC()
         print('get currencies done in ' + str(datetime.now().timestamp() - time) + ' ms')
         return result
-
-    def getCurrencies(self, category):
-        time = datetime.now().timestamp()
-        self._nbp_service.getCurrencies(category)
-        print('get currencies done in ' + str(datetime.now().timestamp() - time) + ' ms')

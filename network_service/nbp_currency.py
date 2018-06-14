@@ -8,7 +8,7 @@ class NBPCurrency:
         return self._code
 
     def get_mid(self):
-        return self._code
+        return self._mid
 
     def get_currency(self):
         return self._currency

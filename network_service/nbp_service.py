@@ -9,6 +9,7 @@ from network_service.nbp_service_interface import NBPServiceInterface
 class NBPService(NBPServiceInterface):
     def __init__(self):
         super().__init__()
+        self.requestService = requests
         self._mapper = NBPModelMapper()
         self._url = 'http://api.nbp.pl/api/exchangerates/tables/'
 
@@ -23,6 +24,5 @@ class NBPService(NBPServiceInterface):
 
     def getCurrencies(self, category):
         temp_url = self._url + category
-        resp = requests.get(temp_url)
-        print(resp.json())
+        resp = self.requestService.get(temp_url)
         return self._mapper.map_models(resp.json())
