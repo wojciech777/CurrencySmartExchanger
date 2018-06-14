@@ -7,9 +7,10 @@ class CurrenciesExchange:
 
     def add_currency(self, new_curr, def_exchange_curr):
         for curr in self._currs:
-            if not self._curr_dict[def_exchange_curr, curr]:
+            if not ((def_exchange_curr, curr) in self._curr_dict):
                 raise ValueError("This default_exchange_currency can't be used, chose another")
-        self._currs.append(new_curr.get_name())
+        if not (new_curr in self._currs):
+            self._currs.append(new_curr.get_name())
         self._curr_dict[new_curr.get_name(), new_curr.get_name()] = 1
         self._unkn_currs = []
         self._add_new_currency(new_curr)
