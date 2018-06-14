@@ -15,6 +15,6 @@ def step_impl(context):
     context.currencies = context.nbp_service.getCurrenciesCategoryA()
 
 
-@then('check actual currencies')
+@then('Check actual currencies')
 def step_impl(context):
     assert context.currencies
