@@ -1,6 +1,8 @@
 import unittest
-import csv_parsing.csv_importer as currencies
+
 import mock
+
+import csv_parsing.csv_importer as currencies
 
 
 class CurrenciesTestCase(unittest.TestCase):

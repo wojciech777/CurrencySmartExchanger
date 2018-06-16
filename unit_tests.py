@@ -1,9 +1,20 @@
-import os
-from genericpath import isfile
-from os.path import join
+import unittest
+from unittest import TestSuite
 
-path = os.path.join(os.path.dirname(__file__), 'tests/unit_tests')
-path = str.replace(path, "\\", "/")
-test_files = [f for f in os.listdir(path) if isfile(join(path, f))]
-for file in test_files:
-    os.system(f"{file} 1")
+modules = [
+    "tests"
+]
+
+
+def load_tests(loader, tests, pattern):
+    suite = TestSuite()
+    for module in modules:
+        for all_test_suite in unittest.defaultTestLoader.discover(module, 'test*.py'):
+            for test_suite in all_test_suite:
+                suite.addTests(test_suite)
+
+    return suite
+
+
+if __name__ == '__main__':
+    unittest.main()

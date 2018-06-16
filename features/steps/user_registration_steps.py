@@ -8,7 +8,7 @@ from models.user import User
 
 @given('No existing account with given details')
 def step_impl(context):
-    context.manager = DatabaseManager('test')
+    context.manager = DatabaseManager('test.sqlite3')
 
 
 @when('user registers in the application')

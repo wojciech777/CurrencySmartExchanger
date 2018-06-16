@@ -1,7 +1,7 @@
 import unittest
 
-from network_service.nbp_service_proxy import NBPServiceProxy
 from network_service.nbp_currency import NBPCurrency
+from network_service.nbp_service_proxy import NBPServiceProxy
 
 
 class MockNBPService:

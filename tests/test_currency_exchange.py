@@ -46,7 +46,7 @@ class TestCurrencyExchangeClassMethods(unittest.TestCase):
     def test_adding_csv_currencies(self):
         exchange = CurrenciesExchange()
         importer = CsvCurrenciesImporter()
-        importer.fill_data_from_csv('../../../features/test_data/rates.csv', ',')
+        importer.fill_data_from_csv('tests/test_data/rates.csv', ',')
         currency_list = importer.get_currencies_list()
         exchange.add_currencies(currency_list, 'USD')
         rate = exchange.get_exchange_rate('USD', 'EUR')

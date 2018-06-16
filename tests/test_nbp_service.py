@@ -1,5 +1,5 @@
-import unittest
 import json
+import unittest
 
 from network_service.nbp_service import NBPService
 
