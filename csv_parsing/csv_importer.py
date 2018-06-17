@@ -19,7 +19,7 @@ class CsvCurrenciesImporter:
             self.__fill_exchange_rates(reader)
 
     def get_currencies_names(self):
-        return self._currencies.values()
+        return list(self._currencies.values())
 
     def get_exchange_ratio(self, from_currency, to_currency):
         return self._exchanges[from_currency.upper(), to_currency.upper()]
