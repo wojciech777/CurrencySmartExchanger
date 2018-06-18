@@ -3,6 +3,7 @@ import os.path
 from csv_parsing.csv_importer import CsvCurrenciesImporter
 from models.currencies_exchange import CurrenciesExchange
 from models.currency_builder import CurrencyBuilder
+from network_service.nbp_service_proxy import NBPServiceProxy
 
 
 def clearConsole():
@@ -17,7 +18,8 @@ def __printMenu():
     print("[2] - Define new currency with exchange rates")
     print("[3] - Get all currencies exchange rates in a form of table")
     print("[4] - Check exchange rate between two currencies")
-    print("[5] - Exit")
+    print("[5] - Check NBP currencies and exchange rates")
+    print("[6] - Exit")
 
 
 def __filenameRequest():
@@ -92,6 +94,16 @@ def __infinitely_ask_for_valid_currency_name():
     return currencyExchangeName
 
 
+def __infinitely_ask_for_valid_currency_type():
+    while True:
+        currencyExchangeType = input("Provide currency type (A, B, C): ")
+        types = ["A", "a", "B", "b", "C", "c"]
+        if currencyExchangeType in types:
+            break
+        print("You have provided unknown type - try again")
+    return currencyExchangeType
+
+
 def __let_user_check_exchange_rate_beetween_two_currencies():
     print("Provide source currency name: ")
     sourceCurrencyName = __infinitely_ask_for_valid_currency_name()
@@ -106,6 +118,23 @@ def __let_user_check_exchange_rate_beetween_two_currencies():
 
     print("Exchange rate from {0} to {1} is {2}".format(sourceCurrencyName, secondCurrencyName, str(
         currenciesExchange.get_exchange_rate(sourceCurrencyName, secondCurrencyName))))
+
+
+def __let_user_check_exchange_rate_nbp():
+    source_currency_type = __infinitely_ask_for_valid_currency_type()
+
+    nbp_service = NBPServiceProxy()
+    if source_currency_type == "A" or source_currency_type == "a":
+        network_currencies = nbp_service.getCurrenciesCategoryA()
+    elif source_currency_type == "B" or source_currency_type == "b":
+        network_currencies = nbp_service.getCurrenciesCategoryB()
+    else:
+        network_currencies = nbp_service.getCurrenciesCategoryC()
+
+    for currency in network_currencies:
+        print("{0} - {1} - rate {2}".format(currency.get_code(),
+                                            currency.get_currency(),
+                                            str(currency.get_mid())))
 
 
 def __infinitely_ask_for_valid_csv_filename_and_delimiter():
@@ -147,7 +176,7 @@ while True:
     __printMenu()
     userAction = __infinitely_ask_for_action_from_menu()
 
-    if userAction == 5:
+    if userAction == 6:
         print("You've provided " + str(userAction) + " -  Good Bye")
         break
 
@@ -173,6 +202,9 @@ while True:
 
     elif userAction == 4:
         __let_user_check_exchange_rate_beetween_two_currencies()
+
+    elif userAction == 5:
+        __let_user_check_exchange_rate_nbp()
 
     else:
         print("You've provided unknown command number - try again")
